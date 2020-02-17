@@ -9,9 +9,15 @@
 /* Begin PBXBuildFile section */
 		003E1C1223D5BB9600C9637A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003E1C1123D5BB9600C9637A /* Coordinator.swift */; };
 		003E1C1423D5BBB800C9637A /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003E1C1323D5BBB800C9637A /* ApplicationCoordinator.swift */; };
+		005ED54823F6942B00713DCC /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005ED54723F6942B00713DCC /* Router.swift */; };
 		006BC7CC23CF0CCA00B34C1B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006BC7CB23CF0CCA00B34C1B /* AppDelegate.swift */; };
 		006BC7D523CF0CCF00B34C1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006BC7D423CF0CCF00B34C1B /* Assets.xcassets */; };
 		006BC7D823CF0CCF00B34C1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006BC7D623CF0CCF00B34C1B /* LaunchScreen.storyboard */; };
+		00731BCA23F6F79000AC1A51 /* FadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BC923F6F79000AC1A51 /* FadeAnimator.swift */; };
+		00731BCC23F6F79F00AC1A51 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BCB23F6F79F00AC1A51 /* Animator.swift */; };
+		00731BD223FA87EC00AC1A51 /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BCF23FA87EC00AC1A51 /* ModalTransition.swift */; };
+		00731BD323FA87EC00AC1A51 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BD023FA87EC00AC1A51 /* Transition.swift */; };
+		00731BD423FA87EC00AC1A51 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BD123FA87EC00AC1A51 /* PushTransition.swift */; };
 		0097D3D923F4006F0097DD9D /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */; };
 		0097D3F623F423350097DD9D /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0097D3F523F423350097DD9D /* Test.swift */; };
 		00D1BA0323F5ABD90019A2D8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */; };
@@ -24,11 +30,17 @@
 /* Begin PBXFileReference section */
 		003E1C1123D5BB9600C9637A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		003E1C1323D5BBB800C9637A /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		005ED54723F6942B00713DCC /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		006BC7C823CF0CCA00B34C1B /* ArchitectureTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchitectureTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006BC7CB23CF0CCA00B34C1B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006BC7D423CF0CCF00B34C1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		006BC7D723CF0CCF00B34C1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		006BC7D923CF0CCF00B34C1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00731BC923F6F79000AC1A51 /* FadeAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeAnimator.swift; sourceTree = "<group>"; };
+		00731BCB23F6F79F00AC1A51 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		00731BCF23FA87EC00AC1A51 /* ModalTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalTransition.swift; sourceTree = "<group>"; };
+		00731BD023FA87EC00AC1A51 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		00731BD123FA87EC00AC1A51 /* PushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
 		0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCoordinator.swift; sourceTree = "<group>"; };
 		0097D3F523F423350097DD9D /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -52,10 +64,13 @@
 		003E1C1023D5BB7B00C9637A /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				00731BCE23FA87EC00AC1A51 /* Transitions */,
+				00731BCD23FA879F00AC1A51 /* Routing */,
 				003E1C1123D5BB9600C9637A /* Coordinator.swift */,
 				003E1C1323D5BBB800C9637A /* ApplicationCoordinator.swift */,
 				0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */,
 				0097D3F523F423350097DD9D /* Test.swift */,
+				005ED54723F6942B00713DCC /* Router.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -87,6 +102,25 @@
 				006BC7D923CF0CCF00B34C1B /* Info.plist */,
 			);
 			path = ArchitectureTest;
+			sourceTree = "<group>";
+		};
+		00731BCD23FA879F00AC1A51 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				00731BCB23F6F79F00AC1A51 /* Animator.swift */,
+				00731BC923F6F79000AC1A51 /* FadeAnimator.swift */,
+			);
+			path = Routing;
+			sourceTree = "<group>";
+		};
+		00731BCE23FA87EC00AC1A51 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				00731BCF23FA87EC00AC1A51 /* ModalTransition.swift */,
+				00731BD023FA87EC00AC1A51 /* Transition.swift */,
+				00731BD123FA87EC00AC1A51 /* PushTransition.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 		00D1BA0123F5A9280019A2D8 /* Scenes */ = {
@@ -187,15 +221,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00731BD323FA87EC00AC1A51 /* Transition.swift in Sources */,
+				005ED54823F6942B00713DCC /* Router.swift in Sources */,
 				006BC7CC23CF0CCA00B34C1B /* AppDelegate.swift in Sources */,
 				003E1C1223D5BB9600C9637A /* Coordinator.swift in Sources */,
 				0097D3F623F423350097DD9D /* Test.swift in Sources */,
 				00D1BA0923F5B0480019A2D8 /* signupController.swift in Sources */,
 				00D1BA0523F5AD640019A2D8 /* AuthViewController.swift in Sources */,
 				0097D3D923F4006F0097DD9D /* AuthorizationCoordinator.swift in Sources */,
+				00731BCC23F6F79F00AC1A51 /* Animator.swift in Sources */,
 				003E1C1423D5BBB800C9637A /* ApplicationCoordinator.swift in Sources */,
+				00731BD423FA87EC00AC1A51 /* PushTransition.swift in Sources */,
+				00731BCA23F6F79000AC1A51 /* FadeAnimator.swift in Sources */,
 				00D1BA0323F5ABD90019A2D8 /* BaseViewController.swift in Sources */,
 				00D1BA0F23F5B12D0019A2D8 /* ProfileViewController.swift in Sources */,
+				00731BD223FA87EC00AC1A51 /* ModalTransition.swift in Sources */,
 				00D1BA0C23F5B0E00019A2D8 /* ForgotPassword.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

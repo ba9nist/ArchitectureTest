@@ -9,11 +9,11 @@
 import UIKit
 
 protocol ForgotPasswordViewControllerFactoryType {
-    func makeForgotPasswordController(completion: ((_ state: ForgotPasswordViewController.FinishState) -> Void)?) -> UIViewController
+    func makeForgotPasswordController(completion: ((_ state: ForgotPasswordViewController.FinishState) -> Void)?) -> PresentableModule
 }
 
 extension ForgotPasswordViewControllerFactoryType {
-    func makeForgotPasswordController(completion: ((ForgotPasswordViewController.FinishState) -> Void)?) -> UIViewController {
+    func makeForgotPasswordController(completion: ((ForgotPasswordViewController.FinishState) -> Void)?) -> PresentableModule {
         let controller = ForgotPasswordViewController()
         controller.onComplete = completion
         return controller

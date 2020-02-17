@@ -9,11 +9,11 @@
 import UIKit
 
 protocol ProfileViewControllerFactoryType {
-    func makeProfileController(completion: ((_ state: ProfileViewController.FinishState) -> Void)?) -> UIViewController
+    func makeProfileController(completion: ((_ state: ProfileViewController.FinishState) -> Void)?) -> PresentableModule
 }
 
 extension ProfileViewControllerFactoryType {
-    func makeProfileController(completion: ((ProfileViewController.FinishState) -> Void)?) -> UIViewController {
+    func makeProfileController(completion: ((ProfileViewController.FinishState) -> Void)?) -> PresentableModule {
         let controller = ProfileViewController()
         controller.onComplete = completion
         return controller

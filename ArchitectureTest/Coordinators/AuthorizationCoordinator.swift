@@ -9,7 +9,6 @@
 import UIKit
 
 class AuthorizationCoordinator: Coordinator {
-//    typealias ModuleFactory = TestViewControllerFactoryType & YelloTestViewControllerFactoryType
     class ModuleFactory: AuthViewControllerFactoryType & ProfileViewControllerFactoryType & SignUpViewControllerFactoryType & ForgotPasswordViewControllerFactoryType {}
     
     enum State {
@@ -38,7 +37,9 @@ class AuthorizationCoordinator: Coordinator {
     }
     
     func start() {
-        changeState(to: currentState)
+        let controller = makeController()
+        router.navigationController.pushViewController(controller, animated: false)
+//        changeState(to: currentState)
     }
     
     private func changeState(to state: State) {
@@ -46,7 +47,12 @@ class AuthorizationCoordinator: Coordinator {
         let controller = makeController()
         viewControllers.append(controller)
         
-        router.navigationController.pushViewController(controller, animated: true)
+//        router.navigationController.pushViewController(controller, animated: true)
+//        router.open(viewController: controller, transition: PushTransition(animator: nil, isAnimated: true))
+        
+//        let pushTransition = MyTransition(animator: FadeAnimator(), isAnimated: true, type: .push)
+        let modalTransition = MyTransition(animator: FadeAnimator(), isAnimated: true, type: .modal)
+        router.open(viewController: controller, transition: modalTransition)
     }
     
     private func backAction() {
@@ -58,7 +64,7 @@ class AuthorizationCoordinator: Coordinator {
         }
     }
     
-    func makeController() -> UIViewController {
+    func makeController() -> PresentableModule {
         switch currentState {
         case .auth:
             return moduleFactory.makeAuthController { (state) in
@@ -105,7 +111,7 @@ class AuthorizationCoordinator: Coordinator {
                 }
             }
         case .main:
-            return UIViewController()
+            return BaseViewController()
         }
     }
 }

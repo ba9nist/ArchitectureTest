@@ -9,11 +9,11 @@
 import UIKit
 
 protocol AuthViewControllerFactoryType {
-    func makeAuthController(completion: ((_ state: AuthViewController.FinishState) -> Void)?) -> UIViewController
+    func makeAuthController(completion: ((_ state: AuthViewController.FinishState) -> Void)?) -> PresentableModule
 }
 
 extension AuthViewControllerFactoryType {
-    func makeAuthController(completion: ((AuthViewController.FinishState) -> Void)?) -> UIViewController {
+    func makeAuthController(completion: ((AuthViewController.FinishState) -> Void)?) -> PresentableModule {
         let controller = AuthViewController()
         controller.onComplete = completion
         
