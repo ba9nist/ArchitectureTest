@@ -11,6 +11,8 @@ import UIKit
 class AuthorizationCoordinator: Coordinator {
     class ModuleFactory: AuthViewControllerFactoryType & ProfileViewControllerFactoryType & SignUpViewControllerFactoryType & ForgotPasswordViewControllerFactoryType {}
     
+    class CoordinatorFactory: ModalCoordinatorFactory {}
+    
     enum State {
         case auth
         case register
@@ -40,26 +42,29 @@ class AuthorizationCoordinator: Coordinator {
     private var router: Router
     private var childCoordinators = [Coordinator]()
     private var currentState = State.auth
-    private var moduleFactory: ModuleFactory
+    private var moduleFactory: ModuleFactory = ModuleFactory()
+    private var coordinatorFactory: CoordinatorFactory = CoordinatorFactory()
     private var storage = Storage()
     
     init(router: Router) {
         self.router = router
-        moduleFactory = ModuleFactory()
     }
     
     func start() {
-        let controller = makeController()
-//        router.navigationController.pushViewController(controller, animated: false)
-        router.open(viewController: controller, transition: PushTransition())
-//        changeState(to: currentState)
+        changeState(to: currentState)
     }
     
     private func changeState(to state: State) {
         currentState = state
         let controller = makeController()
-        
-        router.open(viewController: controller, transition: state.transition)
+        if let module = controller as? UIViewController {
+            router.open(viewController: module, transition: state.transition)
+        } else if let coordinator = controller as? Coordinator {
+            childCoordinators.append(coordinator)
+            coordinator.start()
+        } else {
+            fatalError("Wrong coordinator or module to present")
+        }
     }
     
     private func backAction() {
@@ -67,8 +72,8 @@ class AuthorizationCoordinator: Coordinator {
     }
     
     private func moveBack(to state: State) {
-        if let module = router.modules.filter({getState(for: $0) == state}).last {
-            router.back(to: module)
+        if let module = router.modules.filter({getState(for: $0.controller) == state}).last {
+            router.back(to: module.controller)
         }
     }
     
@@ -87,7 +92,7 @@ class AuthorizationCoordinator: Coordinator {
         }
     }
     
-    func makeController() -> PresentableModule {
+    func makeController() -> Any? {
         switch currentState {
         case .auth:
             return moduleFactory.makeAuthController { (state) in
@@ -131,12 +136,26 @@ class AuthorizationCoordinator: Coordinator {
 
                 case .success:
                     self.moveBack(to: .auth)
-//                    self.changeState(to: .main)
-
+                case .picture:
+                    self.changeState(to: .main)
                 }
             }
         case .main:
-            return BaseViewController()
+            return coordinatorFactory.makeModalCoordinator(router: self.router, delegate: self)
         }
     }
+}
+
+extension AuthorizationCoordinator: ModalCoordinatorDeleate {
+    func onComplete(_ coordinator: ModalCoordinator, state: ModalCoordinator.FinishState) {
+        switch state {
+        case .cancel:
+            self.childCoordinators.removeAll()
+            break
+        case .success:
+            self.childCoordinators.removeAll()
+            break
+        }
+    }
+
 }

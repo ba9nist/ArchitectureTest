@@ -10,11 +10,11 @@
 import UIKit
 
 protocol SignUpViewControllerFactoryType {
-    func makeSignUpController(completion: ((_ state: SignUpViewController.FinishState) -> Void)?) -> PresentableModule
+    func makeSignUpController(completion: ((_ state: SignUpViewController.FinishState) -> Void)?) -> UIViewController
 }
 
 extension SignUpViewControllerFactoryType {
-    func makeSignUpController(completion: ((SignUpViewController.FinishState) -> Void)?) -> PresentableModule {
+    func makeSignUpController(completion: ((SignUpViewController.FinishState) -> Void)?) -> UIViewController {
         let controller = SignUpViewController()
         controller.onComplete = completion
         return controller

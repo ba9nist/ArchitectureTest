@@ -8,29 +8,36 @@
 
 import UIKit
 
-class PresentableModule: UIViewController {
-    
-    var transition: Transition?
-    
+protocol RouterDelegate: class {
+    func removedTopModule(_ controller: UIViewController)
 }
 
 class Router: NSObject {
 
     let navigationController: UINavigationController
-    public var modules = [PresentableModule]()
     
+    struct ModuleHolder {
+        let controller: UIViewController
+        let transition: Transition
+        
+    }
+    public var modules = [ModuleHolder]()
+
+    weak var delegate: RouterDelegate?
+
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        
+
         super.init()
         navigationController.delegate = self
     }
-    
+
     //should use module here PreentableModule
-    func open(viewController: PresentableModule, transition: Transition) {
-        viewController.transition = transition
-        modules.append(viewController)
-        
+    func open(viewController: UIViewController, transition: Transition) {
+       
+        let holder = ModuleHolder(controller: viewController, transition: transition)
+        modules.append(holder)
+
         if let modalTransition = transition as? ModalTransition {
             viewController.transitioningDelegate = self
             viewController.modalPresentationStyle = modalTransition.presentationStyle
@@ -40,41 +47,55 @@ class Router: NSObject {
             navigationController.pushViewController(viewController, animated: transition.animated)
         }
     }
-    
+
     func closeLast() {
-        guard let module = modules.last, let transition = module.transition else { return }
+        guard let module = modules.last else { return }
+
+        let transition = module.transition
         
         switch transition {
         case is ModalTransition:
-            module.dismiss(animated: transition.animated, completion: nil)
+            module.controller.dismiss(animated: transition.animated, completion: nil)
         default:
             self.navigationController.popViewController(animated: transition.animated)
         }
-        
+
         self.removeModule(module)
     }
-    
-    func back(to module: PresentableModule) {
-        guard let transition = module.transition else {
+
+    func back(to controller: UIViewController) -> Int {
+        guard let module = modules.filter({$0.controller === controller}).last else { return 0 }
+        
+        let transition = module.transition
+
+        if transition is PushTransition {
+            if let controllers = navigationController.popToViewController(module.controller, animated: transition.animated) {
+               self.modules.removeLast(controllers.count)
+               return controllers.count
+            }
+        }
+
+        return 0
+    }
+
+    private func removeModule(_ module: ModuleHolder) {
+        guard let index = modules.lastIndex(where: {$0.controller === module.controller}) else {
+            print("Controller to remove not found")
             return
         }
-        
-        if transition is PushTransition {
-            navigationController.popToViewController(module, animated: transition.animated)
-        }
-        
-        if let indexOfModule = self.modules.lastIndex(where: {$0 == module}) {
-            self.modules.removeLast(self.modules.count - indexOfModule - 1)
-        }
+
+        self.modules.remove(at: index)
     }
     
-    private func removeModule(_ controller: UIViewController) {
-        guard let index = modules.lastIndex(where: {$0 == controller}) else {
-            print("Controller not found")
+    private func removeModules(to controller: UIViewController) {
+        guard let index = modules.lastIndex(where: {$0.controller === controller}) else {
+            print("Controller to remove not found")
             return
         }
         
-        self.modules.remove(at: index)
+        
+        modules.removeLast(modules.count - index - 1)
+        delegate?.removedTopModule(module.controller)
     }
 }
 
@@ -88,22 +109,28 @@ extension Router: UINavigationControllerDelegate {
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        let lookupVC = operation == .push ? toVC : fromVC
+        let controller = operation == .push ? toVC : fromVC
         
-        guard let controller = modules.filter({ $0 == lookupVC }).first else {
-            print("Controller not found")
+        guard let module = modules.filter({ $0.controller === controller }).first else {
+            print("Controller not to pop found")
             return nil
         }
         
-        guard let animator = controller.transition?.animator  else {
+        guard let animator = module.transition.animator  else {
+            if operation == .pop {
+                self.removeModule(module)
+            }
             return nil
         }
+        
+        
         
         if operation == .push {
             animator.isPresenting = true
             return animator
         }
         else {
+            self.removeModule(module)
             animator.isPresenting = false
             return animator
         }
@@ -115,12 +142,12 @@ extension Router: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController,
                              presenting: UIViewController,
                              source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-       guard let controller = modules.filter({ $0 == presented }).first else {
-            print("Controller not found")
+        guard let controller = modules.filter({ $0.controller === presented }).first else {
+            print("Controller to present not found")
             return nil
         }
         
-        guard let animator = controller.transition?.animator  else {
+        guard let animator = controller.transition.animator  else {
             return nil
         }
         
@@ -129,15 +156,17 @@ extension Router: UIViewControllerTransitioningDelegate {
     }
 
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let controller = modules.filter({ $0 == dismissed }).first else {
-            print("Controller not found")
+        guard let controller = modules.filter({ $0.controller === dismissed }).first else {
+            print("Controller to dismiss not found")
             return nil
         }
         
-        guard let animator = controller.transition?.animator  else {
+        guard let animator = controller.transition.animator  else {
+            self.removeModule(controller)
             return nil
         }
         
+        self.removeModule(controller)
         animator.isPresenting = false
         return animator
     }

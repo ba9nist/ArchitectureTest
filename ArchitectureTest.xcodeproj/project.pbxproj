@@ -16,6 +16,9 @@
 		00731BCA23F6F79000AC1A51 /* FadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BC923F6F79000AC1A51 /* FadeAnimator.swift */; };
 		00731BCC23F6F79F00AC1A51 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BCB23F6F79F00AC1A51 /* Animator.swift */; };
 		00731BD323FA87EC00AC1A51 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BD023FA87EC00AC1A51 /* Transition.swift */; };
+		00731BE023FC05B500AC1A51 /* ModalCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BDF23FC05B500AC1A51 /* ModalCoordinator.swift */; };
+		00731BE323FC068F00AC1A51 /* InitialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BE223FC068F00AC1A51 /* InitialController.swift */; };
+		00731BE523FC079100AC1A51 /* FinishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BE423FC079100AC1A51 /* FinishController.swift */; };
 		0097D3D923F4006F0097DD9D /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */; };
 		00D1BA0323F5ABD90019A2D8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */; };
 		00D1BA0523F5AD640019A2D8 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0423F5AD640019A2D8 /* AuthViewController.swift */; };
@@ -36,6 +39,9 @@
 		00731BC923F6F79000AC1A51 /* FadeAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeAnimator.swift; sourceTree = "<group>"; };
 		00731BCB23F6F79F00AC1A51 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		00731BD023FA87EC00AC1A51 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		00731BDF23FC05B500AC1A51 /* ModalCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCoordinator.swift; sourceTree = "<group>"; };
+		00731BE223FC068F00AC1A51 /* InitialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialController.swift; sourceTree = "<group>"; };
+		00731BE423FC079100AC1A51 /* FinishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishController.swift; sourceTree = "<group>"; };
 		0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCoordinator.swift; sourceTree = "<group>"; };
 		00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		00D1BA0423F5AD640019A2D8 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 				003E1C1123D5BB9600C9637A /* Coordinator.swift */,
 				003E1C1323D5BBB800C9637A /* ApplicationCoordinator.swift */,
 				0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */,
+				00731BDF23FC05B500AC1A51 /* ModalCoordinator.swift */,
 				005ED54723F6942B00713DCC /* Router.swift */,
 			);
 			path = Coordinators;
@@ -114,9 +121,19 @@
 			path = Transitions;
 			sourceTree = "<group>";
 		};
+		00731BE123FC066B00AC1A51 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				00731BE223FC068F00AC1A51 /* InitialController.swift */,
+				00731BE423FC079100AC1A51 /* FinishController.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		00D1BA0123F5A9280019A2D8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				00731BE123FC066B00AC1A51 /* Modal */,
 				00D1BA0723F5B03A0019A2D8 /* Main */,
 				00D1BA0623F5B0290019A2D8 /* Auth */,
 				00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */,
@@ -213,9 +230,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				00731BD323FA87EC00AC1A51 /* Transition.swift in Sources */,
+				00731BE323FC068F00AC1A51 /* InitialController.swift in Sources */,
 				005ED54823F6942B00713DCC /* Router.swift in Sources */,
 				006BC7CC23CF0CCA00B34C1B /* AppDelegate.swift in Sources */,
 				003E1C1223D5BB9600C9637A /* Coordinator.swift in Sources */,
+				00731BE023FC05B500AC1A51 /* ModalCoordinator.swift in Sources */,
+				00731BE523FC079100AC1A51 /* FinishController.swift in Sources */,
 				00D1BA0923F5B0480019A2D8 /* signupController.swift in Sources */,
 				00D1BA0523F5AD640019A2D8 /* AuthViewController.swift in Sources */,
 				0097D3D923F4006F0097DD9D /* AuthorizationCoordinator.swift in Sources */,
