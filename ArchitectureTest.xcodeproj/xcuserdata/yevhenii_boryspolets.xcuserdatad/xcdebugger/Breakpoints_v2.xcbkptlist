@@ -3,4 +3,86 @@
    uuid = "F84AD631-1363-4801-A38B-72AAEF45861B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "09021681-596D-42BD-95DF-5953DF636042"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArchitectureTest/Coordinators/Router.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "navigationController(_:animationControllerFor:from:to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "15F794F4-C217-4439-B583-E8EBC06F3AF9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArchitectureTest/Coordinators/Router.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "navigationController(_:didShow:animated:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4D4D4995-A55A-4474-B5BA-68577395CDC5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ArchitectureTest/Coordinators/Router.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "removeModule(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4D4D4995-A55A-4474-B5BA-68577395CDC5 - ab5aa4d815c32b7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ArchitectureTest.Router.(removeModule in _3211D4074A03FEBC63AEF510CBA4E6EF)(__C.UIViewController) -&gt; ()"
+                  moduleName = "ArchitectureTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yevhenii_boryspolets/workspace/Test/ArchitectureTest/ArchitectureTest/Coordinators/Router.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  uuid = "4D4D4995-A55A-4474-B5BA-68577395CDC5 - 25a0c684e06bd99b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ArchitectureTest.PresentableModule) -&gt; Swift.Bool in ArchitectureTest.Router.(removeModule in _3211D4074A03FEBC63AEF510CBA4E6EF)(__C.UIViewController) -&gt; ()"
+                  moduleName = "ArchitectureTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yevhenii_boryspolets/workspace/Test/ArchitectureTest/ArchitectureTest/Coordinators/Router.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "42">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

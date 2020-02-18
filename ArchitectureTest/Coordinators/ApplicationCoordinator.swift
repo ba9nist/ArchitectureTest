@@ -27,9 +27,6 @@ class ApplicationCoordinator: Coordinator {
     }
     
     func start() {
-//        let controller = getInitialController()
-//        createWindow(with: controller)
-        
         createWindow(with: router.navigationController)
         
         switch state {

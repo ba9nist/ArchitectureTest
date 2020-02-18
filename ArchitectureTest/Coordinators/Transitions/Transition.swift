@@ -9,26 +9,38 @@ import Foundation
 import UIKit
 
 protocol Transition: class {
-    func open(_ viewController: UIViewController)
-    func close(_ viewController: UIViewController)
+    var animator: Animator? { get }
+    var animated: Bool { get }
 }
 
-class BaseTransition: NSObject, Transition {
-    weak var viewController: UIViewController?
-    
+class PushTransition: Transition {
     var animator: Animator?
-    var animated: Bool = true
+    var animated: Bool
     
-    init(animator: Animator?, animated: Bool = true) {
+    init(animated: Bool = true, animator: Animator? = nil) {
         self.animator = animator
         self.animated = animated
     }
+}
+
+class ModalTransition: Transition {
+    var animator: Animator?
+    var animated: Bool
     
-    func open(_ viewController: UIViewController) {
-        self.viewController = viewController
-    }
+    var transitionStyle: UIModalTransitionStyle
+    var presentationStyle: UIModalPresentationStyle
     
-    func close(_ viewController: UIViewController) {
+    init(animated: Bool = true,
+         animator: Animator? = nil,
+         transitionStyle: UIModalTransitionStyle = .coverVertical,
+         presentationStyle: UIModalPresentationStyle = .overFullScreen) {
+        
+        self.animator = animator
+        self.animated = animated
+        self.transitionStyle = transitionStyle
+        self.presentationStyle = presentationStyle
         
     }
+    
+    
 }

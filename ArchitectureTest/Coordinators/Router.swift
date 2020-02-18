@@ -10,31 +10,14 @@ import UIKit
 
 class PresentableModule: UIViewController {
     
-    weak var transition: BaseTransition?
-    var myTransition: MyTransition?
+    var transition: Transition?
     
-}
-
-struct MyTransition {
-    enum TransitionType {
-        case push
-        case modal
-    }
-    
-    var animator: Animator?
-    var isAnimated: Bool = true
-    var type: TransitionType = .push
 }
 
 class Router: NSObject {
-    
-    
-    
+
     let navigationController: UINavigationController
     public var modules = [PresentableModule]()
-    public var controllers: [UIViewController] {
-        return navigationController.viewControllers
-    }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -43,38 +26,43 @@ class Router: NSObject {
         navigationController.delegate = self
     }
     
-    func presentViewController(_ controller: UIViewController, transition: BaseTransition) {
-        navigationController.pushViewController(controller, animated: transition.animated)
-    }
-    
-    func pop(to viewController: UIViewController, animated: Bool = true) {
-        navigationController.popToViewController(viewController, animated: animated)
-    }
-    
     //should use module here PreentableModule
-    func open(viewController: PresentableModule, transition: MyTransition) {
-        viewController.myTransition = transition
+    func open(viewController: PresentableModule, transition: Transition) {
+        viewController.transition = transition
         modules.append(viewController)
-        switch transition.type {
-        case .modal:
+        
+        if let modalTransition = transition as? ModalTransition {
             viewController.transitioningDelegate = self
-            navigationController.present(viewController, animated: transition.isAnimated)
-        case .push:
-            navigationController.pushViewController(viewController, animated: transition.isAnimated)
+            viewController.modalPresentationStyle = modalTransition.presentationStyle
+            viewController.modalTransitionStyle = modalTransition.transitionStyle
+            navigationController.present(viewController, animated: transition.animated)
+        } else {
+            navigationController.pushViewController(viewController, animated: transition.animated)
         }
     }
     
-    func close(viewController: PresentableModule) {
-        guard let index = indexOfModule(module: viewController) else {
-            print("failed index")
+    private var popDidComplete: (() -> Void)?
+    func closeLast() {
+        guard let module = modules.last, let transition = module.transition else { return }
+        
+        switch transition {
+        case is ModalTransition:
+            module.dismiss(animated: transition.animated) {
+//                self.removeModule(module)
+                
+            }
+        default:
+            self.navigationController.popViewController(animated: transition.animated)
+        }
+    }
+    
+    private func removeModule(_ controller: UIViewController) {
+        guard let index = modules.lastIndex(where: {$0 == controller}) else {
+            print("Controller not found")
             return
         }
         
-        modules.remove(at: index)
-    }
-    
-    private func indexOfModule(module: PresentableModule) -> Int? {
-       return modules.firstIndex(where: {$0 == module})
+        self.modules.remove(at: index)
     }
 }
 
@@ -95,7 +83,10 @@ extension Router: UINavigationControllerDelegate {
             return nil
         }
         
-        guard let animator = controller.myTransition?.animator  else {
+        guard let animator = controller.transition?.animator  else {
+            if operation == .pop {
+                self.removeModule(lookupVC)
+            }
             return nil
         }
         
@@ -105,7 +96,8 @@ extension Router: UINavigationControllerDelegate {
         }
         else {
             animator.isPresenting = false
-            self.close(viewController: controller)
+            
+            self.removeModule(lookupVC)
             return animator
         }
     }
@@ -116,12 +108,12 @@ extension Router: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController,
                              presenting: UIViewController,
                              source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-       guard let controller = modules.filter({ $0 == presenting }).first else {
+       guard let controller = modules.filter({ $0 == presented }).first else {
             print("Controller not found")
             return nil
         }
         
-        guard let animator = controller.myTransition?.animator  else {
+        guard let animator = controller.transition?.animator  else {
             return nil
         }
         
@@ -135,11 +127,10 @@ extension Router: UIViewControllerTransitioningDelegate {
             return nil
         }
         
-        guard let animator = controller.myTransition?.animator  else {
+        guard let animator = controller.transition?.animator  else {
             return nil
         }
         
-        self.close(viewController: controller)
         animator.isPresenting = false
         return animator
     }

@@ -17,6 +17,18 @@ class AuthorizationCoordinator: Coordinator {
         case forgotPassword
         case profile
         case main
+        
+        var transition: Transition {
+            switch self {
+            case .auth, .forgotPassword, .profile:
+                return PushTransition()
+            case .main:
+                return ModalTransition()
+            case .register:
+//                return ModalTransition(animated: true, animator: FadeAnimator())
+                return ModalTransition()
+            }
+        }
     }
     
     struct Storage {
@@ -25,7 +37,6 @@ class AuthorizationCoordinator: Coordinator {
     
     
     private var router: Router
-    private var viewControllers = [UIViewController]()
     private var childCoordinators = [Coordinator]()
     private var currentState = State.auth
     private var moduleFactory: ModuleFactory
@@ -38,30 +49,20 @@ class AuthorizationCoordinator: Coordinator {
     
     func start() {
         let controller = makeController()
-        router.navigationController.pushViewController(controller, animated: false)
+//        router.navigationController.pushViewController(controller, animated: false)
+        router.open(viewController: controller, transition: PushTransition())
 //        changeState(to: currentState)
     }
     
     private func changeState(to state: State) {
         currentState = state
         let controller = makeController()
-        viewControllers.append(controller)
         
-//        router.navigationController.pushViewController(controller, animated: true)
-//        router.open(viewController: controller, transition: PushTransition(animator: nil, isAnimated: true))
-        
-//        let pushTransition = MyTransition(animator: FadeAnimator(), isAnimated: true, type: .push)
-        let modalTransition = MyTransition(animator: FadeAnimator(), isAnimated: true, type: .modal)
-        router.open(viewController: controller, transition: modalTransition)
+        router.open(viewController: controller, transition: state.transition)
     }
     
     private func backAction() {
-        if viewControllers.count > 1 {
-            router.navigationController.popViewController(animated: true)
-            viewControllers.removeLast()
-        } else {
-            //finish coordinator
-        }
+        router.closeLast()
     }
     
     func makeController() -> PresentableModule {
@@ -78,7 +79,7 @@ class AuthorizationCoordinator: Coordinator {
                 case .forgotPassword:
                     self.changeState(to: .forgotPassword)
                 case .success:
-                    self.changeState(to: .main)
+                    self.changeState(to: .profile)
                 }
             }
         case .register:
@@ -90,7 +91,8 @@ class AuthorizationCoordinator: Coordinator {
                 case .login:
                     self.changeState(to: .auth)
                 case .forgotPassword:
-                    self.changeState(to: .forgotPassword)
+//                    self.changeState(to: .forgotPassword)
+                    self.backAction()
                 }
             }
         case .forgotPassword:
