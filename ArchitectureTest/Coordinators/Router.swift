@@ -41,18 +41,30 @@ class Router: NSObject {
         }
     }
     
-    private var popDidComplete: (() -> Void)?
     func closeLast() {
         guard let module = modules.last, let transition = module.transition else { return }
         
         switch transition {
         case is ModalTransition:
-            module.dismiss(animated: transition.animated) {
-//                self.removeModule(module)
-                
-            }
+            module.dismiss(animated: transition.animated, completion: nil)
         default:
             self.navigationController.popViewController(animated: transition.animated)
+        }
+        
+        self.removeModule(module)
+    }
+    
+    func back(to module: PresentableModule) {
+        guard let transition = module.transition else {
+            return
+        }
+        
+        if transition is PushTransition {
+            navigationController.popToViewController(module, animated: transition.animated)
+        }
+        
+        if let indexOfModule = self.modules.lastIndex(where: {$0 == module}) {
+            self.modules.removeLast(self.modules.count - indexOfModule - 1)
         }
     }
     
@@ -84,9 +96,6 @@ extension Router: UINavigationControllerDelegate {
         }
         
         guard let animator = controller.transition?.animator  else {
-            if operation == .pop {
-                self.removeModule(lookupVC)
-            }
             return nil
         }
         
@@ -96,8 +105,6 @@ extension Router: UINavigationControllerDelegate {
         }
         else {
             animator.isPresenting = false
-            
-            self.removeModule(lookupVC)
             return animator
         }
     }

@@ -26,7 +26,8 @@ class AuthorizationCoordinator: Coordinator {
                 return ModalTransition()
             case .register:
 //                return ModalTransition(animated: true, animator: FadeAnimator())
-                return ModalTransition()
+//                return ModalTransition()
+                return PushTransition()
             }
         }
     }
@@ -63,6 +64,27 @@ class AuthorizationCoordinator: Coordinator {
     
     private func backAction() {
         router.closeLast()
+    }
+    
+    private func moveBack(to state: State) {
+        if let module = router.modules.filter({getState(for: $0) == state}).last {
+            router.back(to: module)
+        }
+    }
+    
+    private func getState(for viewController: UIViewController) -> State {
+        switch viewController {
+        case is AuthViewController:
+            return .auth
+        case is SignUpViewController:
+            return .register
+        case is ForgotPasswordViewController:
+            return .forgotPassword
+        case is ProfileViewController:
+            return .profile
+        default:
+            return .main
+        }
     }
     
     func makeController() -> PresentableModule {
@@ -108,7 +130,8 @@ class AuthorizationCoordinator: Coordinator {
                 switch state {
 
                 case .success:
-                    self.changeState(to: .main)
+                    self.moveBack(to: .auth)
+//                    self.changeState(to: .main)
 
                 }
             }

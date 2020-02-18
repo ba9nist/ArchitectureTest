@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol Presentable {
-    func toPresent() -> UIViewController
-}
-
 class ApplicationCoordinator: Coordinator {
     
     enum State {
