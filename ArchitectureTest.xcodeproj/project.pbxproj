@@ -25,6 +25,8 @@
 		00D1BA0923F5B0480019A2D8 /* signupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0823F5B0480019A2D8 /* signupController.swift */; };
 		00D1BA0C23F5B0E00019A2D8 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0B23F5B0E00019A2D8 /* ForgotPassword.swift */; };
 		00D1BA0F23F5B12D0019A2D8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0E23F5B12D0019A2D8 /* ProfileViewController.swift */; };
+		9F88302223FC81C600888CDF /* TestCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F88302123FC81C600888CDF /* TestCoordinator.swift */; };
+		9F88302423FC99CA00888CDF /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F88302323FC99CA00888CDF /* BaseCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		00D1BA0823F5B0480019A2D8 /* signupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signupController.swift; sourceTree = "<group>"; };
 		00D1BA0B23F5B0E00019A2D8 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		00D1BA0E23F5B12D0019A2D8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9F88302123FC81C600888CDF /* TestCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoordinator.swift; sourceTree = "<group>"; };
+		9F88302323FC99CA00888CDF /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 				0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */,
 				00731BDF23FC05B500AC1A51 /* ModalCoordinator.swift */,
 				005ED54723F6942B00713DCC /* Router.swift */,
+				9F88302123FC81C600888CDF /* TestCoordinator.swift */,
+				9F88302323FC99CA00888CDF /* BaseCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -230,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00731BD323FA87EC00AC1A51 /* Transition.swift in Sources */,
+				9F88302423FC99CA00888CDF /* BaseCoordinator.swift in Sources */,
 				00731BE323FC068F00AC1A51 /* InitialController.swift in Sources */,
 				005ED54823F6942B00713DCC /* Router.swift in Sources */,
 				006BC7CC23CF0CCA00B34C1B /* AppDelegate.swift in Sources */,
@@ -238,6 +245,7 @@
 				00731BE523FC079100AC1A51 /* FinishController.swift in Sources */,
 				00D1BA0923F5B0480019A2D8 /* signupController.swift in Sources */,
 				00D1BA0523F5AD640019A2D8 /* AuthViewController.swift in Sources */,
+				9F88302223FC81C600888CDF /* TestCoordinator.swift in Sources */,
 				0097D3D923F4006F0097DD9D /* AuthorizationCoordinator.swift in Sources */,
 				00731BCC23F6F79F00AC1A51 /* Animator.swift in Sources */,
 				003E1C1423D5BBB800C9637A /* ApplicationCoordinator.swift in Sources */,

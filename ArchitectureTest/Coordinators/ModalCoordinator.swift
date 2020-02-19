@@ -155,10 +155,3 @@ extension ModalCoordinator: FinishViewControllerDelegate {
     
     
 }
-
-extension ModalCoordinator: RouterDelegate {
-    func didRemoveModules() {
-        
-    }
-    
-}

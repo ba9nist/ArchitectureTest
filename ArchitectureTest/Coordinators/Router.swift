@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol RouterDelegate: class {
-    func removedTopModule(_ controller: UIViewController)
-}
-
 class Router: NSObject {
 
     let navigationController: UINavigationController
@@ -22,8 +18,6 @@ class Router: NSObject {
         
     }
     public var modules = [ModuleHolder]()
-
-    weak var delegate: RouterDelegate?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -95,7 +89,6 @@ class Router: NSObject {
         
         
         modules.removeLast(modules.count - index - 1)
-        delegate?.removedTopModule(module.controller)
     }
 }
 

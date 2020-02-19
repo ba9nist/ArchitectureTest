@@ -12,11 +12,13 @@ class ApplicationCoordinator: Coordinator {
     
     enum State {
         case authorization
+        case test
     }
     
     var window: UIWindow?
     private var router: Router
-    private var state: State = .authorization
+    private var state: State = .test
+    private var coordinators = [Coordinator]()
     
     init(router: Router) {
         self.router = router
@@ -28,7 +30,12 @@ class ApplicationCoordinator: Coordinator {
         switch state {
         case .authorization:
             let authorizationCoordinator = AuthorizationCoordinator(router: router)
+            coordinators.append(authorizationCoordinator)
             authorizationCoordinator.start()
+        case .test:
+            let testCoordinator = TestCoordinator(navigationController: router.navigationController)
+            coordinators.append(testCoordinator)
+            testCoordinator.start()
         }
     }
     
