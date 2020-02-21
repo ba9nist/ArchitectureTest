@@ -23,6 +23,11 @@ class TestRouter<T: CoordinatorState>: NSObject, UINavigationControllerDelegate,
     }
     
     func open(_ controller: UIViewController, for state: T, with transition: Transition) {
+        if let presentedController = navigationController.presentedViewController {
+            print("cant do nothing")
+            return
+        }
+        
         stateMachine.push(StateHolder(state: state, controller: controller, transition: transition))
         
         if let modalTransition = transition as? ModalTransition {
@@ -48,6 +53,7 @@ class TestRouter<T: CoordinatorState>: NSObject, UINavigationControllerDelegate,
     
     func goBack(to viewController: UIViewController) {
         guard let toState = stateMachine.lastElement(viewController) else {
+            print("There is not such viewController (\(viewController)) inside StateMachine ")
             return
         }
             
@@ -56,6 +62,7 @@ class TestRouter<T: CoordinatorState>: NSObject, UINavigationControllerDelegate,
     
     func goBack(to state: T) {
         guard let toState = stateMachine.lastElement(state) else {
+            print("There is not such state (\(state)) inside StateMachine")
             return
         }
         
@@ -63,7 +70,10 @@ class TestRouter<T: CoordinatorState>: NSObject, UINavigationControllerDelegate,
     }
     
     func goBack() {
-        guard let toState = stateMachine.previousState else { return }
+        guard let toState = stateMachine.previousState else {
+            print("Can't go back, there is not previous state")
+            return
+        }
         
         back(state: toState)
     }
@@ -134,11 +144,11 @@ class TestRouter<T: CoordinatorState>: NSObject, UINavigationControllerDelegate,
         }
         
         guard let animator = controller.transition.animator  else {
-            self.movedBack(to: dismissed)
+            stateMachine.pop()
             return nil
         }
         
-        self.movedBack(to: dismissed)
+        stateMachine.pop()
         animator.isPresenting = false
         return animator
     }

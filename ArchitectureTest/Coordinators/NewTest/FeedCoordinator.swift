@@ -14,21 +14,36 @@ protocol CoordinatorState: Equatable {
 
 class FeedCoordinator: Coordinator {
     
-    class ModuleFactory: InitialViewControllerFactoryType & FinishViewControllerFactoryType {}
+    class ModuleFactory: InitialViewControllerFactoryType & FinishViewControllerFactoryType & AuthViewControllerFactoryType & ProfileViewControllerFactoryType & SignUpViewControllerFactoryType & ForgotPasswordViewControllerFactoryType {}
 
     enum State: CoordinatorState {
         case initial
         case finish
         case test1
         case test2
+        case auth
+        case register
+        case forgotPassword
+        case profile
+        case main
         
         var transition: Transition {
             switch self {
             case .finish:
-                return ModalTransition(presentationStyle: .overFullScreen)
-            //                return ModalTransition(animator: FadeAnimator())
+                                return ModalTransition(presentationStyle: .overFullScreen)
+//                return ModalTransition(animator: FadeAnimator())
+            case .auth, .forgotPassword:
+                return PushTransition()
+            case .main, .profile:
+                return ModalTransition()
+            case .register:
+                //                return ModalTransition(animated: true, animator: FadeAnimator())
+                //                return ModalTransition()
+                return PushTransition()
+            case .initial:
+                return PushTransition()
             default:
-                //            return PushTransition()
+//                            return PushTransition()
                 return PushTransition(animated: true, animator: FadeAnimator())
             }
             
@@ -42,7 +57,7 @@ class FeedCoordinator: Coordinator {
     
     private var navigationController: UINavigationController
     private var childCoordinators = [Coordinator]()
-    private var currentState = State.initial
+    private var currentState = State.auth
     private var moduleFactory: ModuleFactory = ModuleFactory()
     private var storage = Storage()
     private var stateMachine = StatesMachine<State>()
@@ -81,6 +96,54 @@ class FeedCoordinator: Coordinator {
             controller = moduleFactory.makeFinishController(delegate: self)
         case .test2, .test1:
             controller = BaseViewController()
+        case .auth:
+            return moduleFactory.makeAuthController { (state) in
+                
+                switch state {
+                    
+                case .login:
+                    self.moveForward(to: .initial)
+                case .signup:
+                    self.moveForward(to: .register)
+                case .forgotPassword:
+                    self.moveForward(to: .forgotPassword)
+                case .success:
+                    self.moveForward(to: .profile)
+                }
+            }
+        case .register:
+            return moduleFactory.makeSignUpController { (state) in
+                switch state {
+                    
+                case .profile:
+                    self.moveForward(to: .profile)
+                case .login:
+                    self.goBack(to: .auth)
+                case .forgotPassword:
+                    self.moveForward(to: .forgotPassword)
+                }
+            }
+        case .forgotPassword:
+            return moduleFactory.makeForgotPasswordController { (state) in
+                switch state {
+                    
+                case .success:
+                    self.goBack(to: .auth)
+                }
+            }
+        case .profile:
+            return moduleFactory.makeProfileController { (state) in
+                switch state {
+                    
+                case .success:
+                    self.goBack(to: .register)
+                case .picture:
+                    self.moveForward(to: .initial)
+                }
+            }
+        case .main:
+            return BaseViewController()
+//            return coordinatorFactory.makeModalCoordinator(router: self.router, delegate: self)
         }
 
         return controller
@@ -100,7 +163,6 @@ extension FeedCoordinator: InitialViewControllerDelegate {
         }
     }
 
-
 }
 
 extension FeedCoordinator: FinishViewControllerDelegate {
@@ -115,6 +177,4 @@ extension FeedCoordinator: FinishViewControllerDelegate {
             self.goBack(to: .initial)
         }
     }
-
-
 }

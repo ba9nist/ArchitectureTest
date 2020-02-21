@@ -44,7 +44,7 @@ class StatesMachine<T: CoordinatorState> {
         if let index = array.lastIndex(where: { $0.controller === viewController }) {
             let removing = array.count - index - 1
             array.removeLast(removing)
-       
+
         }
     }
     
