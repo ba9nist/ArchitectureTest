@@ -26,6 +26,7 @@
 		00731C6824002B1400AC1A51 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731C6724002B1400AC1A51 /* ChatListViewController.swift */; };
 		00731C6A24002B7000AC1A51 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731C6924002B7000AC1A51 /* ChatViewController.swift */; };
 		00731C6C24002B9900AC1A51 /* ChatUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731C6B24002B9900AC1A51 /* ChatUsersViewController.swift */; };
+		00731C6E2400319F00AC1A51 /* BaseSecondCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731C6D2400319F00AC1A51 /* BaseSecondCoordinator.swift */; };
 		0097D3D923F4006F0097DD9D /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */; };
 		00D1BA0323F5ABD90019A2D8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */; };
 		00D1BA0523F5AD640019A2D8 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0423F5AD640019A2D8 /* AuthViewController.swift */; };
@@ -33,7 +34,6 @@
 		00D1BA0C23F5B0E00019A2D8 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0B23F5B0E00019A2D8 /* ForgotPassword.swift */; };
 		00D1BA0F23F5B12D0019A2D8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0E23F5B12D0019A2D8 /* ProfileViewController.swift */; };
 		9F88302223FC81C600888CDF /* TestCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F88302123FC81C600888CDF /* TestCoordinator.swift */; };
-		9F88302423FC99CA00888CDF /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F88302323FC99CA00888CDF /* BaseCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +58,7 @@
 		00731C6724002B1400AC1A51 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		00731C6924002B7000AC1A51 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		00731C6B24002B9900AC1A51 /* ChatUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUsersViewController.swift; sourceTree = "<group>"; };
+		00731C6D2400319F00AC1A51 /* BaseSecondCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSecondCoordinator.swift; sourceTree = "<group>"; };
 		0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCoordinator.swift; sourceTree = "<group>"; };
 		00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		00D1BA0423F5AD640019A2D8 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		00D1BA0B23F5B0E00019A2D8 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		00D1BA0E23F5B12D0019A2D8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9F88302123FC81C600888CDF /* TestCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoordinator.swift; sourceTree = "<group>"; };
-		9F88302323FC99CA00888CDF /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,6 @@
 				00731BDF23FC05B500AC1A51 /* ModalCoordinator.swift */,
 				005ED54723F6942B00713DCC /* Router.swift */,
 				9F88302123FC81C600888CDF /* TestCoordinator.swift */,
-				9F88302323FC99CA00888CDF /* BaseCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -159,6 +158,7 @@
 				00731C5E23FFF35F00AC1A51 /* TestRouter.swift */,
 				00731C6023FFF36B00AC1A51 /* FeedCoordinator.swift */,
 				00731C642400230F00AC1A51 /* ChatCoordinator.swift */,
+				00731C6D2400319F00AC1A51 /* BaseSecondCoordinator.swift */,
 			);
 			path = NewTest;
 			sourceTree = "<group>";
@@ -275,7 +275,6 @@
 				00731C6123FFF36B00AC1A51 /* FeedCoordinator.swift in Sources */,
 				00731BD323FA87EC00AC1A51 /* Transition.swift in Sources */,
 				00731C652400230F00AC1A51 /* ChatCoordinator.swift in Sources */,
-				9F88302423FC99CA00888CDF /* BaseCoordinator.swift in Sources */,
 				00731BE323FC068F00AC1A51 /* InitialController.swift in Sources */,
 				00731C6824002B1400AC1A51 /* ChatListViewController.swift in Sources */,
 				005ED54823F6942B00713DCC /* Router.swift in Sources */,
@@ -285,6 +284,7 @@
 				00731C6A24002B7000AC1A51 /* ChatViewController.swift in Sources */,
 				00731BE523FC079100AC1A51 /* FinishController.swift in Sources */,
 				00D1BA0923F5B0480019A2D8 /* signupController.swift in Sources */,
+				00731C6E2400319F00AC1A51 /* BaseSecondCoordinator.swift in Sources */,
 				00D1BA0523F5AD640019A2D8 /* AuthViewController.swift in Sources */,
 				9F88302223FC81C600888CDF /* TestCoordinator.swift in Sources */,
 				0097D3D923F4006F0097DD9D /* AuthorizationCoordinator.swift in Sources */,

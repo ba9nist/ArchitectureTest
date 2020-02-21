@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CoordinatorState: Equatable {
-    
+    var transition: Transition { get }
 }
 
 protocol Coordinator {

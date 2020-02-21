@@ -19,7 +19,7 @@ class ChatCoordinatorFactory: ChatCoordinatorFactoryType {
     }
 }
 
-class ChatCoordinator: Coordinator {
+class ChatCoordinator: BaseSecondCoordinator<ChatCoordinator.State>, Coordinator {
     
     class ModuleFactory: ChatViewControllerFactoryType, ChatListViewControllerFactoryType, ChatUsersViewControllerFactoryType  {}
     
@@ -46,45 +46,30 @@ class ChatCoordinator: Coordinator {
         
     }
     
-    
     private var presentedController: UINavigationController
     private var navigationController: UINavigationController
     private var childCoordinators = [Coordinator]()
-    private var currentState = State.chatsList
+    private var initialState = State.chatsList
     private var moduleFactory: ModuleFactory = ModuleFactory()
     private var coordinatorFactory: CoordinatorFactory = CoordinatorFactory()
     private var storage = Storage()
-    private var stateMachine = StatesMachine<State>()
-    private var router: TestRouter<State>
     
     init(navigationController: UINavigationController) {
         self.presentedController = navigationController
         self.navigationController = UINavigationController()
-        self.router = TestRouter(navigationController: self.navigationController, stateMachine: self.stateMachine)
+        
+        let stateMachine = StatesMachine<State>()
+        let router = TestRouter(navigationController: self.navigationController, stateMachine: stateMachine)
+        super.init(router: router, stateMachine: stateMachine)
     }
     
     func start() {
-        moveForward(to: currentState)
+        moveForward(to: initialState)
         self.presentedController.present(self.navigationController, animated: true, completion: nil)
     }
     
-    private func moveForward(to state: State) {
-        currentState = state
-        
-        let controller = makeController()
-        router.open(controller, for: state, with: state.transition)
-    }
-    
-    private func goBack(to state: State) {
-        router.goBack(to: state)
-    }
-    
-    private func goBack() {
-        router.goBack()
-    }
-    
-    func makeController() -> UIViewController {
-        switch currentState {
+    override func makeController(for state: ChatCoordinator.State) -> UIViewController {
+        switch state {
             
         case .chatsList:
             return moduleFactory.makeChatListController(delegate: self)
