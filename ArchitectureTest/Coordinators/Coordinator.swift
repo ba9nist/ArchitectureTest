@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol CoordinatorState: Equatable {
+    
+}
+
 protocol Coordinator {
     func start()
 }

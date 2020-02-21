@@ -8,13 +8,11 @@
 
 import UIKit
 
-protocol CoordinatorState: Equatable {
-    
-}
-
 class FeedCoordinator: Coordinator {
     
     class ModuleFactory: InitialViewControllerFactoryType & FinishViewControllerFactoryType & AuthViewControllerFactoryType & ProfileViewControllerFactoryType & SignUpViewControllerFactoryType & ForgotPasswordViewControllerFactoryType {}
+    
+    class CoordinatorFactory: ChatCoordinatorFactory {}
 
     enum State: CoordinatorState {
         case initial
@@ -59,6 +57,7 @@ class FeedCoordinator: Coordinator {
     private var childCoordinators = [Coordinator]()
     private var currentState = State.auth
     private var moduleFactory: ModuleFactory = ModuleFactory()
+    private var coordinatorFactory: CoordinatorFactory = CoordinatorFactory()
     private var storage = Storage()
     private var stateMachine = StatesMachine<State>()
     private var router: TestRouter<State>
@@ -75,8 +74,14 @@ class FeedCoordinator: Coordinator {
     private func moveForward(to state: State) {
         currentState = state
         
-        let controller = makeController()
-        router.open(controller, for: state, with: state.transition)
+        if let controller = makeController() {
+            router.open(controller, for: state, with: state.transition)
+        } else if let coordinator = makeCoordinator() {
+            childCoordinators.append(coordinator)
+            coordinator.start()
+        } else {
+            assertionFailure("cant create module to show for state (\(state))")
+        }
     }
     
     private func goBack(to state: State) {
@@ -87,7 +92,16 @@ class FeedCoordinator: Coordinator {
         router.goBack()
     }
     
-    func makeController() -> UIViewController {
+    func makeCoordinator() -> Coordinator? {
+        switch currentState {
+        case .main:
+            return coordinatorFactory.makeChatCoordinator(navigation: self.navigationController)
+        default:
+            return nil
+        }
+    }
+    
+    func makeController() -> UIViewController? {
         var controller = UIViewController()
         switch currentState {
         case .initial:
@@ -102,7 +116,7 @@ class FeedCoordinator: Coordinator {
                 switch state {
                     
                 case .login:
-                    self.moveForward(to: .initial)
+                    self.moveForward(to: .main)
                 case .signup:
                     self.moveForward(to: .register)
                 case .forgotPassword:
@@ -142,8 +156,8 @@ class FeedCoordinator: Coordinator {
                 }
             }
         case .main:
-            return BaseViewController()
-//            return coordinatorFactory.makeModalCoordinator(router: self.router, delegate: self)
+            return nil
+            
         }
 
         return controller

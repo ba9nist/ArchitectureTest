@@ -12,7 +12,7 @@ class TestRouter<T: CoordinatorState>: NSObject, UINavigationControllerDelegate,
     
     
     private var navigationController: UINavigationController
-    var stateMachine: StatesMachine<T>
+    private var stateMachine: StatesMachine<T>
     
     init(navigationController: UINavigationController, stateMachine: StatesMachine<T>) {
         self.navigationController = navigationController
