@@ -19,6 +19,9 @@
 		00731BE023FC05B500AC1A51 /* ModalCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BDF23FC05B500AC1A51 /* ModalCoordinator.swift */; };
 		00731BE323FC068F00AC1A51 /* InitialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BE223FC068F00AC1A51 /* InitialController.swift */; };
 		00731BE523FC079100AC1A51 /* FinishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731BE423FC079100AC1A51 /* FinishController.swift */; };
+		00731C5F23FFF35F00AC1A51 /* TestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731C5E23FFF35F00AC1A51 /* TestRouter.swift */; };
+		00731C6123FFF36B00AC1A51 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731C6023FFF36B00AC1A51 /* FeedCoordinator.swift */; };
+		00731C632400000700AC1A51 /* StatesMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00731C622400000700AC1A51 /* StatesMachine.swift */; };
 		0097D3D923F4006F0097DD9D /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */; };
 		00D1BA0323F5ABD90019A2D8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */; };
 		00D1BA0523F5AD640019A2D8 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D1BA0423F5AD640019A2D8 /* AuthViewController.swift */; };
@@ -44,6 +47,9 @@
 		00731BDF23FC05B500AC1A51 /* ModalCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalCoordinator.swift; sourceTree = "<group>"; };
 		00731BE223FC068F00AC1A51 /* InitialController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialController.swift; sourceTree = "<group>"; };
 		00731BE423FC079100AC1A51 /* FinishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishController.swift; sourceTree = "<group>"; };
+		00731C5E23FFF35F00AC1A51 /* TestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRouter.swift; sourceTree = "<group>"; };
+		00731C6023FFF36B00AC1A51 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		00731C622400000700AC1A51 /* StatesMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesMachine.swift; sourceTree = "<group>"; };
 		0097D3D823F4006F0097DD9D /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCoordinator.swift; sourceTree = "<group>"; };
 		00D1BA0223F5ABD90019A2D8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		00D1BA0423F5AD640019A2D8 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +74,7 @@
 		003E1C1023D5BB7B00C9637A /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				00731C5D23FFF34C00AC1A51 /* NewTest */,
 				00731BCE23FA87EC00AC1A51 /* Transitions */,
 				00731BCD23FA879F00AC1A51 /* Routing */,
 				003E1C1123D5BB9600C9637A /* Coordinator.swift */,
@@ -134,6 +141,16 @@
 				00731BE423FC079100AC1A51 /* FinishController.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		00731C5D23FFF34C00AC1A51 /* NewTest */ = {
+			isa = PBXGroup;
+			children = (
+				00731C622400000700AC1A51 /* StatesMachine.swift */,
+				00731C5E23FFF35F00AC1A51 /* TestRouter.swift */,
+				00731C6023FFF36B00AC1A51 /* FeedCoordinator.swift */,
+			);
+			path = NewTest;
 			sourceTree = "<group>";
 		};
 		00D1BA0123F5A9280019A2D8 /* Scenes */ = {
@@ -235,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00731C6123FFF36B00AC1A51 /* FeedCoordinator.swift in Sources */,
 				00731BD323FA87EC00AC1A51 /* Transition.swift in Sources */,
 				9F88302423FC99CA00888CDF /* BaseCoordinator.swift in Sources */,
 				00731BE323FC068F00AC1A51 /* InitialController.swift in Sources */,
@@ -250,7 +268,9 @@
 				00731BCC23F6F79F00AC1A51 /* Animator.swift in Sources */,
 				003E1C1423D5BBB800C9637A /* ApplicationCoordinator.swift in Sources */,
 				00731BCA23F6F79000AC1A51 /* FadeAnimator.swift in Sources */,
+				00731C632400000700AC1A51 /* StatesMachine.swift in Sources */,
 				00D1BA0323F5ABD90019A2D8 /* BaseViewController.swift in Sources */,
+				00731C5F23FFF35F00AC1A51 /* TestRouter.swift in Sources */,
 				00D1BA0F23F5B12D0019A2D8 /* ProfileViewController.swift in Sources */,
 				00D1BA0C23F5B0E00019A2D8 /* ForgotPassword.swift in Sources */,
 			);

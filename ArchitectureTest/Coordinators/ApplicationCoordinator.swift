@@ -33,7 +33,7 @@ class ApplicationCoordinator: Coordinator {
             coordinators.append(authorizationCoordinator)
             authorizationCoordinator.start()
         case .test:
-            let testCoordinator = TestCoordinator(navigationController: router.navigationController)
+            let testCoordinator = FeedCoordinator(navigationController: router.navigationController)
             coordinators.append(testCoordinator)
             testCoordinator.start()
         }
